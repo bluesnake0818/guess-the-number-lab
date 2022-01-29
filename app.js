@@ -12,18 +12,16 @@ const game = {
 
     if (bool === true) 
     {
-      return `Congrats! You guessed the number in ${guessesArray.length}!`
+      alert(`Congrats! You guessed the number in ${guessesArray.length}!`)
+      // return 'cograts!'
     } else {
-      if (this.secretNum > lastGuess)
-      {
-        return `Your guess is too low. Previous guesses: ${guessesString}`
-      }
-      else 
-      {
-        return `Your guess is too low. Previous guesses: ${guessesString}`
-      }
+        if (this.secretNum > lastGuess){
+          alert(`Your guess is too low. Previous guesses: ${guessesString}`)
+        } else {
+          alert(`Your guess is too low. Previous guesses: ${guessesString}`)
+        }
     }
-  }
+  },
 
   play: function() {
       this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
@@ -34,7 +32,7 @@ const game = {
       while (userGuess !== this.secretNum) {
         userGuess = this.getGuess()
         this.prevGuesses.push(userGuess)
-        alert(this.render(false, this.prevGuesses))
+        this.render(false, this.prevGuesses)
         // console.log(this.secretNum-userGuess)
       }
 
@@ -42,8 +40,8 @@ const game = {
       //   console.log(num + ' is even')
       //   num += 2
       // } while (num <= 10)
-      alert(this.render(true, this.prevGuesses))
-      return this.prevGuesses
+      
+      return 'end of game'
     // return this.secretNum  
   },
 
