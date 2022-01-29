@@ -5,6 +5,42 @@ const game = {
   smallestNum: 1,
   secretNum: null,
 
+
+
+  play: function() {
+      this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
+      let userGuess = 0
+
+      do {
+        userGuess = this.getGuess()
+        this.prevGuesses.push(userGuess)
+        this.render(false, this.prevGuesses)
+      } while (userGuess !== this.secretNum)
+      
+      // while (userGuess !== this.secretNum) {
+      //   userGuess = this.getGuess()
+      //   this.prevGuesses.push(userGuess)
+      //   this.render(false, this.prevGuesses)
+      // }
+
+      // do {
+      //   console.log(num + ' is even')
+      //   num += 2
+      // } while (num <= 10)
+      
+      return 'end of game'
+  },
+
+  getGuess: function() {
+    let userGuess = 0
+
+    while (userGuess < this.smallestNum || userGuess > this.biggestNum) {
+      userGuess = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`))
+    }
+    
+    return userGuess
+    },
+
   render: function(bool, guessesArray) {
     let message = ''
     let lastGuess = guessesArray[guessesArray.length]
@@ -20,49 +56,14 @@ const game = {
           alert(`Your guess is too low. Previous guesses: ${guessesString}`)
         }
     }
-  },
+  }
 
-  play: function() {
-      this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
-      
-      let userGuess = this.getGuess()
-
-      while (userGuess !== this.secretNum) {
-        userGuess = this.getGuess()
-        this.prevGuesses.push(userGuess)
-        this.render(false, this.prevGuesses)
-        // console.log(this.secretNum-userGuess)
-      }
-
-      // do {
-      //   console.log(num + ' is even')
-      //   num += 2
-      // } while (num <= 10)
-      
-      return 'end of game'
-    // return this.secretNum  
-  },
-
-  getGuess: function() {
-    let userGuess = 0
-
-    while (userGuess < this.smallestNum || userGuess > this.biggestNum) {
-      userGuess = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`))
-    }
-    
-    return userGuess
-    }
   }
 
 console.log(game.play())
 console.log(`the secret number is ${game.secretNum}`)
 
-// function game(num) {
-//   console.log(parseInt(num))
-// }
-
-// game(12)
 
 /* problems: 
 1. The first number input in the prompt doesn't get passed.
-2. When the correct secret number is typed in, it alerts "the number is too low" and then ends the game. 
+2. When the correct secret number is typed in, it alerts "the number is too low" and then ends the game. */
