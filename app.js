@@ -1,8 +1,8 @@
 const game = {
   title: 'Guess the Number!',
   prevGuesses: [],
-  biggestNum: 10,
-  smallestNum: 1,
+  smallestNum: null,
+  biggestNum: null,
   secretNum: null,
 
   getNewSmallestNum: function(num) {
@@ -14,9 +14,14 @@ const game = {
   },
 
   play: function() {
-      this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
-      let userGuess = 0
-      let bool = null
+    this.smallestNum = parseInt(prompt(`Enter the lower bound of the range between 1 and 100 inclusive:`)) 
+    this.biggestNum = parseInt(prompt(`Enter the higher bound of the range between 1 and 100 inclusive:`))
+
+    alert(`Your secret number will be between ${this.smallestNum} and ${this.biggestNum}`) 
+    this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
+      
+    let userGuess = 0
+    let bool = null
 
       do {
         userGuess = this.getGuess()
@@ -85,5 +90,8 @@ console.log(`the secret number is ${game.secretNum}`)
 // new biggestNum, so that the player can't enter a number greater than it. 
 // 8. If the player enters a number that is less than the secretNum make it 
 // the new smallestNum, so that the player can't enter a number less than it.
-9. when a number outside of smallestNumber or biggestNumber is typed in, show alert message "your number needs to be between 'smallestNum' and 'biggestNum'" 
+9. when a number outside of smallestNumber or biggestNumber is typed in, show the following alert message 
+"your number needs to be between 'smallestNum' and 'biggestNum'" 
+10. more bonus: When `play` is run, immediately prompt the player 
+to enter the smallest and biggest numbers instead of pre-setting values.
 */
