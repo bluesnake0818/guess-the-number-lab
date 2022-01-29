@@ -14,10 +14,10 @@ const game = {
   },
 
   play: function() {
-    this.smallestNum = parseInt(prompt(`Enter the lower bound of the range between 1 and 100 inclusive:`)) 
-    this.biggestNum = parseInt(prompt(`Enter the higher bound of the range between 1 and 100 inclusive:`))
+    this.smallestNum = parseInt(prompt(`[Number Guessing Game] Enter the lower bound of the range between 1 and 100 inclusive:`)) 
+    this.biggestNum = parseInt(prompt(`[Number Guessing Game] Enter the higher bound of the range between 1 and 100 inclusive:`))
 
-    alert(`Your secret number will be between ${this.smallestNum} and ${this.biggestNum}`) 
+    alert(`Your secret number is a number between ${this.smallestNum} and ${this.biggestNum}. Take a guess!`) 
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
       
     let userGuess = 0
@@ -54,7 +54,7 @@ const game = {
       let recentGuess = guessesArray[currentIdx]
       let numTries = guessesArray.length
       let secretNum = parseInt(this.secretNum)
-      let guessesString = guessesArray.join()
+      let guessesString = guessesArray.join(', ')
 
       // alert(`your guess: ${recentGuess}, secret number: ${secretNum}`)
       // alert(secretNum > recentGuess)
@@ -85,13 +85,14 @@ console.log(`the secret number is ${game.secretNum}`)
 // 3. Even when the guess is higher than the correct number, the system alerts "the number is too low". (i was assigning the array length as an index, causing the system to call the index with a non-existent number)
 // 4. The system doesn't alert "`Congrats! You guessed the number in ${guessesArray.length}!`" when the guess is correct. (three equals sign in if statement)
 5. insert "quit" if you want to quit mid-game
-6. fix back to 1-100
+// 6. fix back to 1-100 (replaced by user prompt)
 // 7. If the player enters a number greater than the secretNum make it the 
 // new biggestNum, so that the player can't enter a number greater than it. 
 // 8. If the player enters a number that is less than the secretNum make it 
 // the new smallestNum, so that the player can't enter a number less than it.
 9. when a number outside of smallestNumber or biggestNumber is typed in, show the following alert message 
 "your number needs to be between 'smallestNum' and 'biggestNum'" 
-10. more bonus: When `play` is run, immediately prompt the player 
-to enter the smallest and biggest numbers instead of pre-setting values.
+// 10. more bonus: When `play` is run, immediately prompt the player 
+// to enter the smallest and biggest numbers instead of pre-setting values.
+// 11. previous guesses - space after comma (.join(', '))
 */
