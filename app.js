@@ -1,21 +1,51 @@
 const game = {
   title: 'Guess the Number!',
   prevGuesses: [],
-  smallestNum: null,
-  biggestNum: null,
+  smallestNum: 1,
+  biggestNum: 100,
   secretNum: null,
 
-  getNewSmallestNum: function(num) {
+  setNewSmallestNum: function(num) {
       this.smallestNum = num
   },
 
-  getNewBiggestNum: function(num) {
+  setNewBiggestNum: function(num) {
       this.biggestNum = num
   },
 
+  getNewFixedNum: function() {
+      alert(`Your number has to be between ${this.smallestNum} and ${this.biggestNum}`)
+      let num = parseInt(prompt(`Number:`)) 
+      return num
+  },
+
+  getNewBoundNum: function() {
+      alert(`Your number has to be between ${this.smallestNum} and ${this.biggestNum}`)
+      let num = parseInt(prompt(`Number:`)) 
+      return num
+},
+
+
+
   play: function() {
-    this.smallestNum = parseInt(prompt(`[Number Guessing Game] Enter the lower bound of the range between 1 and 100 inclusive:`)) 
-    this.biggestNum = parseInt(prompt(`[Number Guessing Game] Enter the higher bound of the range between 1 and 100 inclusive:`))
+
+    alert('Welcome to Number Guessing Game')
+    alert('Choose a MIN and a MAX number between 1 and 100, and guess a randomly generated number between in between.')
+    let localSmallNum = null
+    let localBigNum = null
+    
+    localSmallNum = parseInt(prompt(`[LOWER BOUND] Enter the lower bound of the range between 1 and 100 inclusive:`)) 
+    while (localSmallNum < 1 || localSmallNum > 100)
+    {
+      localSmallNum = this.getNewBoundNum()
+    }  
+    this.smallestNum = localSmallNum
+  
+    localBigNum = parseInt(prompt(`[HIGHER BOUND] Enter the higher bound of the range between 1 and 100 inclusive:`))
+    while (localBigNum < this.smallestNum || localBigNum > 100) {
+      localBigNum = this.getNewBoundNum()
+    }
+    this.biggestNum = localBigNum
 
     alert(`Your secret number is a number between ${this.smallestNum} and ${this.biggestNum}. Take a guess!`) 
     this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
@@ -42,9 +72,13 @@ const game = {
   getGuess: function() {
       let userGuess = 0
 
-      while (userGuess < this.smallestNum || userGuess > this.biggestNum) {
-        userGuess = parseInt(prompt(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`))
-      }
+      do {
+      userGuess = this.getNewFixedNum()  
+      } while (userGuess < this.smallestNum || userGuess > this.biggestNum)
+      
+        // alert(`Enter a guess between ${this.smallestNum} and ${this.biggestNum}:`)
+        
+      
       
       return userGuess
       },
@@ -56,20 +90,16 @@ const game = {
       let secretNum = parseInt(this.secretNum)
       let guessesString = guessesArray.join(', ')
 
-      // alert(`your guess: ${recentGuess}, secret number: ${secretNum}`)
-      // alert(secretNum > recentGuess)
-      // alert(secretNum)
-
       if (bool === true) 
       {
-        alert(`Congrats! You guessed the number in ${numTries} tries. The number is ${secretNum}.`)
+        alert(`Congrats! You guessed the number in ${numTries} tri(es). The number is ${secretNum}.`)
       } else {
           if (secretNum > recentGuess){
             alert(`Your guess is too low. Previous guess(es): ${guessesString}`)
-            this.getNewSmallestNum(recentGuess)
+            this.setNewSmallestNum(recentGuess)
           } else {
             alert(`Your guess is too high. Previous guess(es): ${guessesString}`)
-            this.getNewBiggestNum(recentGuess)
+            this.setNewBiggestNum(recentGuess)
           }
       }
   }
@@ -95,4 +125,9 @@ console.log(`the secret number is ${game.secretNum}`)
 // 10. more bonus: When `play` is run, immediately prompt the player 
 // to enter the smallest and biggest numbers instead of pre-setting values.
 // 11. previous guesses - space after comma (.join(', '))
+// 12. use color to differentiate between the word "lower bound" and "higher bound" so that the user isn't 
+// confused that the same message was repeated. (couldn't find a way to alter font style in js. added an intro instead)
+13. "enter a guess between x and y" + "your number has to be between x and y" when a number outside the range in typed in. this happens even when i input a number in the correct range. 
+14. "Try again" vs. "Quit"
+15. Remove the message "your number has to be between x and y" that pops up right after "take a guess!"
 */
