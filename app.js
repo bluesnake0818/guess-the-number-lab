@@ -5,6 +5,14 @@ const game = {
   smallestNum: 1,
   secretNum: null,
 
+  getNewSmallestNum: function(num) {
+      this.smallestNum = num
+  },
+
+  getNewBiggestNum: function(num) {
+      this.biggestNum = num
+  },
+
   play: function() {
       this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
       let userGuess = 0
@@ -53,8 +61,10 @@ const game = {
       } else {
           if (secretNum > recentGuess){
             alert(`Your guess is too low. Previous guess(es): ${guessesString}`)
+            this.getNewSmallestNum(recentGuess)
           } else {
             alert(`Your guess is too high. Previous guess(es): ${guessesString}`)
+            this.getNewBiggestNum(recentGuess)
           }
       }
   }
@@ -71,4 +81,9 @@ console.log(`the secret number is ${game.secretNum}`)
 // 4. The system doesn't alert "`Congrats! You guessed the number in ${guessesArray.length}!`" when the guess is correct. (three equals sign in if statement)
 5. insert "quit" if you want to quit mid-game
 6. fix back to 1-100
+// 7. If the player enters a number greater than the secretNum make it the 
+// new biggestNum, so that the player can't enter a number greater than it. 
+// 8. If the player enters a number that is less than the secretNum make it 
+// the new smallestNum, so that the player can't enter a number less than it.
+9. when a number outside of smallestNumber or biggestNumber is typed in, show alert message "your number needs to be between 'smallestNum' and 'biggestNum'" 
 */
