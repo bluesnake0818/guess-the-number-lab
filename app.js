@@ -13,7 +13,6 @@ const game = {
     if (bool === true) 
     {
       alert(`Congrats! You guessed the number in ${guessesArray.length}!`)
-      // return 'cograts!'
     } else {
         if (this.secretNum > lastGuess){
           alert(`Your guess is too low. Previous guesses: ${guessesString}`)
@@ -26,8 +25,7 @@ const game = {
   play: function() {
       this.secretNum = Math.floor(Math.random() * (this.biggestNum - this.smallestNum + 1)) + this.smallestNum
       
-      let userGuess = 0
-      userGuess = this.getGuess()
+      let userGuess = this.getGuess()
 
       while (userGuess !== this.secretNum) {
         userGuess = this.getGuess()
@@ -64,3 +62,7 @@ console.log(`the secret number is ${game.secretNum}`)
 // }
 
 // game(12)
+
+/* problems: 
+1. The first number input in the prompt doesn't get passed.
+2. When the correct secret number is typed in, it alerts "the number is too low" and then ends the game. 
